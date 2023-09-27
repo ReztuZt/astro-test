@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../Layouts/BaseLayout.astro";
+import { Image } from 'astro:assets';
+import myImage from "../assets/saya.jpeg";
+const pageTitle = "Tentang saya";
+
+function createArticle() {
+  const articleTitle = "Restu Setiawan";
+  const articleContent = "Ini adalah foto saya waktu saya berumur 18 tahun";
+
+  return { articleTitle, articleContent };
+}
+
+function createPhotoItem(imageSrc, altText, caption) {
+  return { imageSrc, altText, caption };
+}
+
+const pageData = {
+  pageTitle,
+  article: createArticle(),
+  image: createPhotoItem(myImage, "Alt Text", "Image Caption"), // Menggunakan createPhotoItem untuk membuat objek gambar
+};
+
+---
+
+<BaseLayout pageTitle={pageData.pageTitle}>
+  <div class="article">
+    
+    <h1>{pageData.article.articleTitle}</h1>
+    <p>{pageData.article.articleContent}</p>
+  </div>
+  <div class="photo-item">
+    <img src={pageData.image.imageSrc} alt={pageData.image.altText} />
+    <p>{pageData.image.caption}</p>
+  </div>
+</BaseLayout>
